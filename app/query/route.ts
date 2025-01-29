@@ -2,12 +2,10 @@ import { db } from "@vercel/postgres";
 
 const client = await db.connect();
 
-async function listInvoices() {
+async function listPlayers() {
     const data = await client.sql`
-    SELECT invoices.amount, customers.name
-    FROM invoices
-    JOIN customers ON invoices.customer_id = customers.id
-    WHERE invoices.amount = 666;
+    SELECT players.id, players.player_name, players.image_url, players.position, players.league
+    FROM players
   `;
 
     return data.rows;
@@ -15,7 +13,7 @@ async function listInvoices() {
 
 export async function GET() {
  try {
-   return Response.json(await listInvoices());
+   return Response.json(await listPlayers());
  } catch (error) {
    return Response.json({ error }, { status: 500 });
  }
