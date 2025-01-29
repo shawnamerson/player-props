@@ -19,6 +19,7 @@ export default function RootLayout({
       <body className="relative">
         <Navbar />
         {children}
+        <SpeedInsights />
         <Footer />
       </body>
     </html>
